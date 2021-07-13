@@ -20,10 +20,16 @@ jobs:
         run: |
           dirname=${{ env.DEST_REPO_TEMP_BRANCH_NAME }}-$(date +"%Y.%m.%d-%H.%M")
           echo $dirname
-          if [[ `git status --porcelain` ]];
-          then echo "then";
-          else exit 0;
+          if [[ `git status --porcelain` ]]
+          then
+            echo "then"
+            echo "then"
+            echo "then"
+          else
+            echo "else"
+            exit 0
           fi
+          echo "exit 0 doesn't work 1"
       - name: Create branch on velocitynetworkfoundation
         run: |
-          echo "exit 0 doesn't work"
+          echo "exit 0 doesn't work 2"
