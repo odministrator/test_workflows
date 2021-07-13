@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Create branch on velocitynetworkfoundation
         run: |
-          dirname=${{ env.DEST_REPO_TEMP_BRANCH_NAME }}+$(date +"%Y.%m.%d-%H.%M")
+          dirname=${{ env.DEST_REPO_TEMP_BRANCH_NAME }}-$(date +"%Y.%m.%d-%H.%M")
           echo $dirname
           if [[ `git status --porcelain` ]];
           then echo "then";
