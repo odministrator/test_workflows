@@ -1,0 +1,26 @@
+name: Pull request Postman files on VNF
+on:
+  push:
+    branches:
+      - master
+      - dev
+      - main
+env:
+  DEST_REPO_URL: 'https://PAT:${{ secrets.VNF_GITHUB_PAT }}@github.com/velocitynetworkfoundation/integration-helpers.git'
+  DEST_REPO_API_URL: 'https://api.github.com/repos/velocitynetworkfoundation/integration-helpers/pulls'
+  DEST_REPO_NAME: "integration-helpers"
+  DEST_REPO_TEMP_BRANCH_NAME: "postman-update"
+  DEST_REPO_BRANCH_NAME: "dev"
+jobs:
+  push-to-vnf:
+    name: Push to VNF
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create branch on velocitynetworkfoundation
+        run: |
+          dirname="${{ env.DEST_REPO_TEMP_BRANCH_NAME }}"+$(date +"%Y.%m.%d-%H.%M")
+          echo $dirname
+          if [[ `git status --porcelain` ]];
+          then echo "then";
+          else echo "else";
+          fi
