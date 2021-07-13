@@ -22,5 +22,8 @@ jobs:
           echo $dirname
           if [[ `git status --porcelain` ]];
           then echo "then";
-          else echo "else";
+          else exit 0;
           fi
+      - name: Create branch on velocitynetworkfoundation
+        run: |
+          echo "exit 0 doesn't work"
