@@ -20,14 +20,11 @@ jobs:
       - name: Show GITHUB_RUN_NUMBER 1
         run: |
           echo $GITHUB_RUN_NUMBER
-      - name: Show GITHUB_RUN_NUMBER 2
-        run: |
-          echo ${{ env.GITHUB_RUN_NUMBER }}
       - name: Set Image Tags Dev
-        run: echo 'dev,${{ env.VER_NUM }}-build.$GITHUB_RUN_NUMBER'
+        run: echo "dev,${{ env.VER_NUM }}-build.$GITHUB_RUN_NUMBER"
         if: github.ref != 'refs/heads/dev'
       - name: Set Image Tags Main
-        run: echo 'latest,${{ env.VER_NUM }}'
+        run: echo "latest,${{ env.VER_NUM }}"
         if: github.ref != 'refs/heads/main'
       - name: Show GITHUB_ENV
         run: echo $GITHUB_ENV
