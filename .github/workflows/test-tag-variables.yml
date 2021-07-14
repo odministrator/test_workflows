@@ -14,18 +14,23 @@ env:
   DEST_REPO_BRANCH_NAME: "dev"
 jobs:
   push-to-vnf:
-    name: Push to VNF
+    name: Test Tags
     runs-on: ubuntu-latest
     steps:
+      - name: Show GITHUB_RUN_ID
+        run: |
+          echo $GITHUB_RUN_ID
+          echo ${{ env.GITHUB_RUN_ID }}
+      - name: Show GITHUB_RUN_NUMBER
+        run: |
+          echo $GITHUB_RUN_NUMBER
+          echo ${{ env.GITHUB_RUN_NUMBER }}
       - name: Set Image Tags Dev
-        run: echo '${{ env.VER_NUM }}-build.BUILD-NUMBER' >> $GITHUB_ENV
+        run: echo 'dev,${{ env.VER_NUM }}-build.${{ env.GITHUB_RUN_NUMBER }}'
         if: github.ref != 'refs/heads/dev'
       - name: Set Image Tags Main
-        run: echo '${{ env.VER_NUM }}' >> $GITHUB_ENV
+        run: echo 'latest,${{ env.VER_NUM }}'
         if: github.ref != 'refs/heads/main'
       - name: Show GITHUB_ENV
         run: echo $GITHUB_ENV
-      - name: Show GITHUB_RUN_ID
-        run: echo $GITHUB_RUN_ID
-      - name: Show GITHUB_RUN_NUMBER
-        run: echo $GITHUB_RUN_NUMBER
+          
