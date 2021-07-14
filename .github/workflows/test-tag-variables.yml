@@ -1,0 +1,31 @@
+name: Test tag variables
+on:
+  push:
+    branches:
+      - master
+      - dev
+      - main
+env:
+  VER_NUM: '0.5.0'
+  DEST_REPO_URL: 'https://PAT:${{ secrets.VNF_GITHUB_PAT }}@github.com/velocitynetworkfoundation/integration-helpers.git'
+  DEST_REPO_API_URL: 'https://api.github.com/repos/velocitynetworkfoundation/integration-helpers/pulls'
+  DEST_REPO_NAME: "integration-helpers"
+  DEST_REPO_TEMP_BRANCH_NAME: "postman-update"
+  DEST_REPO_BRANCH_NAME: "dev"
+jobs:
+  push-to-vnf:
+    name: Push to VNF
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Image Tags Dev
+        run: echo 'dev,${{ env.VER_NUM }}-build.[BUILD-NUMBER]' >> $GITHUB_ENV
+        if: github.ref != 'refs/heads/dev'
+      - name: Set Image Tags Main
+        run: echo 'latest,${{ env.VER_NUM }}' >> $GITHUB_ENV
+        if: github.ref != 'refs/heads/main'
+      - name: Show GITHUB_ENV
+        run: echo $GITHUB_ENV
+      - name: Show GITHUB_RUN_ID
+        run: echo $GITHUB_RUN_ID
+      - name: Show GITHUB_RUN_NUMBER
+        run: echo $GITHUB_RUN_NUMBER
