@@ -26,12 +26,12 @@ jobs:
           echo "$GITHUB_RUN_NUMBER"
       - name: Set TAG
         run: |
-          echo "build.$GITHUB_RUN_NUMBER" >> $TAG
+          echo "build`.$GITHUB_RUN_NUMBER" >> $TAG
       - name: Show GITHUB_RUN_NUMBER 11
         run: |
           echo "$TAG"
       - name: Set Image Tags Dev
-        run: echo "dev,${{ env.VER_NUM }}-build.$GITHUB_RUN_NUMBER"
+        run: echo ${{ env.VER_NUM }}-build."$GITHUB_RUN_NUMBER"
         if: github.ref != 'refs/heads/dev'
       - name: Set Image Tags Main
         run: echo "latest,${{ env.VER_NUM }}"
