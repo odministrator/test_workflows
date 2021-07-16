@@ -7,6 +7,7 @@ on:
       - main
 env:
   VER_NUM: '0.5.0'
+  VER_BUILD_NUM: '0.5.0'
   DEST_REPO_URL: 'https://PAT:${{ secrets.VNF_GITHUB_PAT }}@github.com/velocitynetworkfoundation/integration-helpers.git'
   DEST_REPO_API_URL: 'https://api.github.com/repos/velocitynetworkfoundation/integration-helpers/pulls'
   DEST_REPO_NAME: "integration-helpers"
@@ -20,13 +21,20 @@ jobs:
       - name: Show VER_NUM 1
         run: |
           echo $VER_NUM
+      - name: Show VER_BUILD_NUM 1
+        run: |
+          echo $VER_BUILD_NUM
       - name: Show Set VER_NUM
         run: |
           echo 'VER_NUM=${{ env.VER_NUM }}${{ format('-build.{0}', env.GITHUB_SHA_SHORT) }}' >> $GITHUB_ENV
+          echo VER_BUILD_NUM=${{ env.VER_BUILD_NUM }}-build."$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
       - name: Show VER_NUM 2
         run: |
           echo $VER_NUM
-      - name: Show GITHUB_RUN_NUMBER 1
+      - name: Show VER_BUILD_NUM 2
+        run: |
+          echo $VER_BUILD_NUM
+      - name: Show GITHUB_RUN_NUMBER 2
         run: |
           echo $GITHUB_RUN_NUMBER
       - name: Show GITHUB_RUN_NUMBER 2
