@@ -19,13 +19,13 @@ jobs:
     steps:
       - name: Show VER_NUM 1
         run: |
-          echo $GITHUB_RUN_NUMBER
+          echo $VER_NUM
       - name: Show Set VER_NUM
         run: |
           echo 'VER_NUM=${{ env.VER_NUM }}${{ format('-build.{0}', env.GITHUB_SHA_SHORT) }}' >> $GITHUB_ENV
       - name: Show VER_NUM 2
         run: |
-          echo $GITHUB_RUN_NUMBER
+          echo $VER_NUM
       - name: Show GITHUB_RUN_NUMBER 1
         run: |
           echo $GITHUB_RUN_NUMBER
