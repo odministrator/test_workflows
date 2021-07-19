@@ -20,11 +20,11 @@ jobs:
       - name: Show VER_NUM 1
         run: |
           echo $VER_NUM
-      - name: Show Set VER_NUM not main
-        if: github.ref != 'refs/heads/main'
+      - name: Show Set VER_NUM != dev
+        if: github.ref != 'refs/heads/dev'
         run: |
           echo VER_NUM=${{ env.VER_BUILD_NUM }}-build."$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
-      - name: Show Set VER_NUM main
+      - name: Show Set VER_NUM == main
         if: github.ref == 'refs/heads/main'
         run: |
           echo 'VER_NUM=${{ env.VER_NUM }}${{ format('-build.{0}', env.GITHUB_SHA_SHORT) }}' >> $GITHUB_ENV
